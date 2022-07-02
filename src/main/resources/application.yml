@@ -1,0 +1,7 @@
+micronaut:
+  application:
+    name: beanstalkCore
+netty:
+  default:
+    allocator:
+      max-order: 3
