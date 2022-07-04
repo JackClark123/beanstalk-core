@@ -1,7 +1,19 @@
 micronaut:
   application:
     name: beanstalkCore
-netty:
+
+
+datasources:
   default:
-    allocator:
-      max-order: 3
+    url: jdbc:cloudspanner:/projects/test/instances/my-instance-id/databases/database-id;autoConfigEmulator=true
+    driverClassName: com.google.cloud.spanner.jdbc.JdbcDriver
+    schema-generate: CREATE
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        dialect: com.google.cloud.spanner.hibernate.SpannerDialect
+        show_sql: true
