@@ -2,6 +2,7 @@ package com.beanstalk.core.spanner.entities.market;
 
 
 import com.beanstalk.core.bigtable.entities.Price;
+import com.beanstalk.core.spanner.entities.market.id.CompetitorId;
 import com.google.cloud.spanner.hibernate.Interleaved;
 import lombok.*;
 import org.hibernate.annotations.Type;
@@ -15,20 +16,11 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Interleaved(parentEntity = Market.class)
-@IdClass(Competitor.CompetitorId.class)
-public class Competitor {
+@Interleaved(parentEntity = Market.class, cascadeDelete = true)
+public class Competitor implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Type(type = "uuid-char")
-    private UUID id;
-
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "market")
-    @Type(type = "uuid-char")
-    private Market market;
+    @EmbeddedId
+    CompetitorId competitorId;
 
     private String name;
 
@@ -44,23 +36,5 @@ public class Competitor {
 
     @Transient
     private Price price;
-
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @EqualsAndHashCode
-    public static class CompetitorId implements Serializable {
-
-        // The primary key columns of the parent entity
-        // must be declared first.
-        @Type(type = "uuid-char")
-        Market market;
-
-        @Type(type = "uuid-char")
-        UUID id;
-
-        // Getters and setters
-    }
 
 }

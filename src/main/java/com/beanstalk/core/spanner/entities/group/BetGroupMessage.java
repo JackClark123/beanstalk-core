@@ -1,43 +1,39 @@
 package com.beanstalk.core.spanner.entities.group;
 
 import com.beanstalk.core.spanner.entities.account.Account;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.google.cloud.spanner.hibernate.Interleaved;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 import org.joda.time.Instant;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.UUID;
 
-@Getter
+@Data
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class GroupMessage {
+public class BetGroupMessage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Type(type = "uuid-char")
     private UUID id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "group")
-    @Type(type = "uuid-char")
-    private Group group;
+    @ManyToOne
+    private BetGroup betGroup;
 
     @Lob
     private String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @Type(type = "uuid-char")
+    @ManyToOne
     private Account account;
 
-    @NotNull
-    private Instant time;
+    @CreationTimestamp
+    private Timestamp createdTime;
 
     @NotNull
     private String type;

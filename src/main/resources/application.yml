@@ -13,7 +13,7 @@ jpa:
   default:
     properties:
       hibernate:
-        hbm2ddl:
-          auto: update
+        jdbc:
+          time_zone: UTC
         dialect: com.google.cloud.spanner.hibernate.SpannerDialect
         show_sql: true

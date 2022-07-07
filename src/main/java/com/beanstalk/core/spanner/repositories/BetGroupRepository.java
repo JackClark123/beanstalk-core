@@ -1,7 +1,7 @@
 package com.beanstalk.core.spanner.repositories;
 
 import com.beanstalk.core.spanner.entities.account.Account;
-import com.beanstalk.core.spanner.entities.group.Group;
+import com.beanstalk.core.spanner.entities.group.BetGroup;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.data.annotation.Id;
 import io.micronaut.data.annotation.Query;
@@ -13,12 +13,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface GroupRepository extends CrudRepository<Group, UUID> {
+public interface BetGroupRepository extends CrudRepository<BetGroup, UUID> {
 
-    @Query(value = "SELECT * FROM group g JOIN group_member gm ON gm.group_id = g.id WHERE gm.account_id = :member", nativeQuery = true)
-    List<Group> findByMember(UUID member);
+    @Query(value = "SELECT * FROM bet_group g JOIN bet_group_member gm ON gm.group_id = g.id WHERE gm.account_id = :member", nativeQuery = true)
+    List<BetGroup> findByMember(UUID member);
 
-    boolean existsByOwner(Account owner);
+    boolean existsByOwner(Account account);
 
     long update(@Id UUID id, @NonNull @NotBlank String name);
 
