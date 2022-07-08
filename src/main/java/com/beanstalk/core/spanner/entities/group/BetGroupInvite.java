@@ -1,32 +1,36 @@
 package com.beanstalk.core.spanner.entities.group;
 
-import com.beanstalk.core.spanner.entities.account.Account;
+import com.beanstalk.core.spanner.entities.account.PublicAccount;
 import com.beanstalk.core.spanner.entities.group.id.GroupInviteId;
-import com.beanstalk.core.spanner.entities.group.id.GroupMemberId;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.cloud.spanner.hibernate.Interleaved;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
-import org.joda.time.Instant;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Interleaved(parentEntity = BetGroup.class, cascadeDelete = true)
+@IdClass(GroupInviteId.class)
 public class BetGroupInvite {
 
-    @EmbeddedId
-    private GroupInviteId groupInviteId;
-
+    @Id
     private String email;
+
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "id")
+    @Type(type = "uuid-char")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    BetGroup betGroup;
 
     @CreationTimestamp
     private Timestamp time;
@@ -35,9 +39,9 @@ public class BetGroupInvite {
 
     @NotNull
     @ManyToOne
-    private Account account;
+    private PublicAccount publicAccount;
 
     @ManyToOne
-    private Account invitedAccount;
+    private PublicAccount invitedPublicAccount;
 
 }

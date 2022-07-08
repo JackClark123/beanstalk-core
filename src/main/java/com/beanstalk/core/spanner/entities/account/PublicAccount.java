@@ -14,9 +14,9 @@ import java.util.UUID;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Account {
+public class PublicAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

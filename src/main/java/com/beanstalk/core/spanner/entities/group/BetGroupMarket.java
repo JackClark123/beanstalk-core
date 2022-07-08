@@ -2,8 +2,8 @@ package com.beanstalk.core.spanner.entities.group;
 
 
 import com.beanstalk.core.spanner.entities.group.id.GroupMarketId;
-import com.beanstalk.core.spanner.entities.group.id.GroupMemberId;
 import com.beanstalk.core.spanner.entities.market.Market;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.cloud.spanner.hibernate.Interleaved;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -16,16 +16,27 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-@Data
+@Getter
+@Setter
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Interleaved(parentEntity = BetGroup.class, cascadeDelete = true)
+@IdClass(GroupMarketId.class)
 public class BetGroupMarket {
 
-    @EmbeddedId
-    private GroupMarketId groupMarketId;
+    @Id
+    @ManyToOne
+    @Type(type = "uuid-char")
+    private Market market;
+
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "id")
+    @Type(type = "uuid-char")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    BetGroup betGroup;
 
     @CreationTimestamp
     private Timestamp createdDate;

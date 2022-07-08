@@ -1,6 +1,9 @@
 package com.beanstalk.core.spanner.repositories;
 
 import com.beanstalk.core.spanner.entities.account.PrivateAccount;
+import com.beanstalk.core.spanner.entities.account.PublicAccount;
+import com.beanstalk.core.spanner.entities.account.id.PrivateAccountId;
+import com.beanstalk.core.transit.Account;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.data.annotation.Id;
 import io.micronaut.data.annotation.Repository;
@@ -12,10 +15,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface PrivateAccountRepository extends CrudRepository<PrivateAccount, UUID> {
+public interface PrivateAccountRepository extends CrudRepository<PrivateAccount, PrivateAccountId> {
 
-    Optional<PrivateAccount> findByEmail(@NotNull String email);
-
-    long update(@NonNull @NotNull @Id UUID id, @NonNull @NotBlank String firstName, @NonNull @NotBlank String lastName);
+    Optional<PrivateAccount> findByPublicAccount(PublicAccount publicAccount);
 
 }

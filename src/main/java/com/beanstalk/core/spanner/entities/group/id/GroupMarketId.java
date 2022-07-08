@@ -1,6 +1,5 @@
 package com.beanstalk.core.spanner.entities.group.id;
 
-import com.beanstalk.core.spanner.entities.account.Account;
 import com.beanstalk.core.spanner.entities.group.BetGroup;
 import com.beanstalk.core.spanner.entities.market.Market;
 import com.fasterxml.jackson.annotation.JsonProperty;

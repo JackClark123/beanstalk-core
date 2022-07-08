@@ -9,4 +9,7 @@ import java.util.UUID;
 
 @Repository
 public interface BetGroupInviteRepository extends CrudRepository<BetGroupInvite, GroupInviteId> {
+
+
+
 }

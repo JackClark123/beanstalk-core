@@ -22,9 +22,7 @@ public class GroupInviteId implements Serializable {
     // The primary key columns of the parent entity
     // must be declared first.
 
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Type(type = "uuid-char")
-    private UUID InviteId;
+    private String email;
 
     @ManyToOne
     @JoinColumn(name = "id")

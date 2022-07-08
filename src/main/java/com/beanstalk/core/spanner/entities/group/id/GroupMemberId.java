@@ -1,6 +1,6 @@
 package com.beanstalk.core.spanner.entities.group.id;
 
-import com.beanstalk.core.spanner.entities.account.Account;
+import com.beanstalk.core.spanner.entities.account.PublicAccount;
 import com.beanstalk.core.spanner.entities.group.BetGroup;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
@@ -8,7 +8,6 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -24,7 +23,7 @@ public class GroupMemberId implements Serializable {
 
     @ManyToOne
     @Type(type = "uuid-char")
-    Account account;
+    PublicAccount publicAccount;
 
     @ManyToOne
     @JoinColumn(name = "id")

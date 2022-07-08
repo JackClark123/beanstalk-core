@@ -1,10 +1,7 @@
 package com.beanstalk.core.spanner.entities.market;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -12,9 +9,11 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
+@Setter
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
@@ -42,8 +41,8 @@ public class Market implements Serializable {
 
     private Boolean completed;
 
-    @OneToMany(mappedBy = "competitorId.market", fetch = FetchType.EAGER)
-    private List<Competitor> competitors;
+    @OneToMany(mappedBy = "market", fetch = FetchType.EAGER)
+    private Set<Competitor> competitors;
 
 
 }
