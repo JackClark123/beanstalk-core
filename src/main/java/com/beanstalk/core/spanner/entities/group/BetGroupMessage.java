@@ -23,12 +23,14 @@ public class BetGroupMessage {
     @Type(type = "uuid-char")
     private UUID id;
 
+    @NotNull
     @ManyToOne
     private BetGroup betGroup;
 
     @Lob
     private String content;
 
+    @NotNull
     @ManyToOne
     private PublicAccount publicAccount;
 
@@ -39,6 +41,6 @@ public class BetGroupMessage {
     private String type;
 
     @Transient
-    private String trackingId;
+    private UUID trackingId;
 
 }

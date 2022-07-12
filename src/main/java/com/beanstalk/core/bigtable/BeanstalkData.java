@@ -8,8 +8,11 @@ import com.google.cloud.bigtable.data.v2.models.Row;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class BeanstalkData {
 
@@ -96,6 +99,9 @@ public class BeanstalkData {
 
         String value = row.getCells(family, field.getName()).get(0).getValue().toStringUtf8();
 
+        if(UUID.class == clazz ) return UUID.fromString( value );
+        if( Timestamp.class == clazz ) return Timestamp.valueOf( value );
+        if( String.class == clazz ) return value;
         if( Boolean.class == clazz ) return Boolean.parseBoolean( value );
         if( Byte.class == clazz ) return Byte.parseByte( value );
         if( Short.class == clazz ) return Short.parseShort( value );
@@ -106,6 +112,7 @@ public class BeanstalkData {
         if( LocalDate.class == clazz) return LocalDate.parse( value );
         if( LocalDateTime.class == clazz ) return LocalDateTime.parse( value );
         if( org.joda.time.Instant.class == clazz) return org.joda.time.Instant.parse( value );
+
         return value;
     }
 

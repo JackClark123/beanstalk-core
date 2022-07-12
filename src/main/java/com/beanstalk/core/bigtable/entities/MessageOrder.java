@@ -20,10 +20,6 @@ public class MessageOrder extends BeanstalkDataType implements Serializable {
         this.message = message;
     }
 
-    public static MessageOrder initErrorOrder() {
-        return new MessageOrder(Order.initValues(), "default message");
-    }
-
     @Family("Order")
     private Order order;
 

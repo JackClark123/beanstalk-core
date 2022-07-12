@@ -17,6 +17,7 @@ import java.util.UUID;
 @EqualsAndHashCode
 public class PrivateAccountId implements Serializable {
 
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Type(type = "uuid-char")
     UUID privateAccountId;
 

@@ -1,6 +1,5 @@
 package com.beanstalk.core.spanner.entities.account;
 
-import com.beanstalk.core.spanner.entities.account.id.PrivateAccountId;
 import com.beanstalk.core.transit.Account;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.cloud.spanner.hibernate.Interleaved;
@@ -9,6 +8,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.UUID;
 
@@ -20,13 +20,7 @@ import java.util.UUID;
 @EqualsAndHashCode
 @Entity
 @Interleaved(parentEntity = PublicAccount.class, cascadeDelete = true)
-@IdClass(PrivateAccountId.class)
-public class PrivateAccount {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Type(type = "uuid-char")
-    UUID privateAccountId;
+public class PrivateAccount implements Serializable {
 
     @Id
     @OneToOne(fetch = FetchType.EAGER)

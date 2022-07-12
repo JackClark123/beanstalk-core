@@ -29,7 +29,6 @@ public class OrderBook extends BeanstalkDataType implements Serializable {
 
         matchedOrders = new ArrayList<>();
         state = OrderType.IN_PROGRESS;
-        messageOrder = MessageOrder.initErrorOrder();
         timestamp = Instant.EPOCH;
 
     }

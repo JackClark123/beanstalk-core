@@ -13,22 +13,6 @@ import java.util.Objects;
 @DefaultCoder(AvroCoder.class)
 public class Order extends BeanstalkDataType implements Serializable {
 
-
-    public static Order initValues() {
-        Order order = new Order();
-        order.setPrice(0);
-        order.setVolume(0);
-        order.setType(0);
-        order.setAccountID("");
-        order.setDateTime(Instant.now());
-        order.setPayout(Payout.initValues());
-        Identifier identifier = new Identifier();
-        identifier.setMarket(0L);
-        identifier.setCompetitor(0L);
-        order.setIdentifier(identifier);
-        return order;
-    }
-
     @Nullable
     @Family("Order")
     private Long id;

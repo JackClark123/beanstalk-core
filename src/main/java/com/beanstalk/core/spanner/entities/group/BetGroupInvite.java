@@ -29,13 +29,10 @@ public class BetGroupInvite {
     @ManyToOne
     @JoinColumn(name = "id")
     @Type(type = "uuid-char")
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     BetGroup betGroup;
 
     @CreationTimestamp
     private Timestamp time;
-
-    private String name;
 
     @NotNull
     @ManyToOne

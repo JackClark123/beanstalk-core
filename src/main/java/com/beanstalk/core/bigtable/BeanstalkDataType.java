@@ -14,6 +14,7 @@ import org.apache.beam.sdk.coders.DefaultCoder;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -146,6 +147,7 @@ public abstract class BeanstalkDataType {
         }
 
         if (Instant.class == field.getType()) return ((Instant) object).toString();
+        if (Timestamp.class == field.getType()) return ((Timestamp) object).toString();
         return object.toString();
     }
 
